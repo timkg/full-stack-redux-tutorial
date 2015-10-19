@@ -38,6 +38,6 @@ export function next(state) {
   });
 }
 
-export function vote(state, entry) {
-  return state.updateIn(["vote", "count", entry], 0, count => count + 1);
+export function vote(voteState, entry) {
+  return voteState.updateIn(["count", entry], 0, count => count + 1);
 }

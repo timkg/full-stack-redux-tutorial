@@ -106,19 +106,15 @@ describe("application logic", () => {
   describe("vote", () => {
     it("creates a vote count for the voted entry", () => {
       const state = Map({
-        vote: Map({
-          pair: List.of("Trainspotting", "Pulp Fiction")
-        }),
+        pair: List.of("Trainspotting", "Pulp Fiction"),
         entries: List()
       });
       const nextState = vote(state, "Trainspotting");
 
       expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of("Trainspotting", "Pulp Fiction"),
-          count: Map({
-            "Trainspotting": 1
-          })
+        pair: List.of("Trainspotting", "Pulp Fiction"),
+        count: Map({
+          "Trainspotting": 1
         }),
         entries: List()
       }));
@@ -126,24 +122,20 @@ describe("application logic", () => {
 
     it("adds to existing count for the voted entry", () => {
       const state = Map({
-        vote: Map({
-          pair: List.of("Trainspotting", "Pulp Fiction"),
-          count: Map({
-            "Trainspotting": 1,
-            "Pulp Fiction": 2
-          })
+        pair: List.of("Trainspotting", "Pulp Fiction"),
+        count: Map({
+          "Trainspotting": 1,
+          "Pulp Fiction": 2
         }),
         entries: List()
       });
 
       const nextState = vote(state, "Trainspotting");
       expect(nextState).to.equal(Map({
-        vote: Map({
-          pair: List.of("Trainspotting", "Pulp Fiction"),
-          count: Map({
-            "Trainspotting": 2,
-            "Pulp Fiction": 2
-          })
+        pair: List.of("Trainspotting", "Pulp Fiction"),
+        count: Map({
+          "Trainspotting": 2,
+          "Pulp Fiction": 2
         }),
         entries: List()
       }));
