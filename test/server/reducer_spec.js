@@ -1,8 +1,8 @@
 import { fromJS } from "immutable";
 import { expect } from "chai";
 
-import reducer from "../src/reducer";
-import { INITIAL_STATE } from "../src/core";
+import reducer from "../../src/server/reducer";
+import { INITIAL_STATE } from "../../src/server/core";
 
 describe("reducer", () => {
   it("handles SET_ENTRIES", () => {
