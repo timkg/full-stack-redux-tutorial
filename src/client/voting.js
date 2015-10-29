@@ -16,6 +16,6 @@ class VotingComponent extends Component {
   }
 }
 
-VotingComponent.defaultProps = { pair: [] };
+VotingComponent.defaultProps = { pair: [], vote: (entry) => { console.log(entry) } };
 
 export default VotingComponent
