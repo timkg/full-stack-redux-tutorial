@@ -3,8 +3,9 @@ import Winner from "./winner";
 import Vote from "./vote";
 import { fromJS } from "immutable";
 import Router, { Link } from "react-router";
+import { connect } from "react-redux";
 
-class Voting extends Component {
+export class Voting extends Component {
   isDisabled() {
     return !!this.props.votedFor;
   }
@@ -32,7 +33,14 @@ Voting.defaultProps = {
   pair: fromJS([]),
   votedFor: null,
   winner: null,
-  vote: (entry) => { console.error(entry) }
+  vote: (entry) => { console.log(entry) }
 };
 
-export default Voting
+function mapStateToProps(state) {
+  return {
+    pair: state.getIn(["vote", "pair"]),
+    winner: state.get("winner")
+  };
+}
+
+export const VotingContainer = connect(mapStateToProps)(Voting);

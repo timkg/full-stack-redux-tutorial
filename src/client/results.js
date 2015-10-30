@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { fromJS } from "immutable"
 import Router, { Link } from "react-router";
 import Winner from "./winner";
+import { connect } from "react-redux";
 
-class Results extends Component {
+export class Results extends Component {
   getVotes(entry) {
     if (this.props.tally.has(entry)) {
       return this.props.tally.get(entry);
@@ -45,4 +46,12 @@ Results.defaultProps = {
   tally: fromJS({})
 };
 
-export default Results
+function mapStateToProps (state) {
+  return {
+    pair: state.getIn(["vote", "pair"]),
+    tally: state.getIn(["vote", "tally"]),
+    winner: state.get("winner")
+  };
+}
+
+export const ResultsContainer = connect(mapStateToProps)(Results);
