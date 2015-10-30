@@ -1,30 +1,16 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import Router, { Route } from "react-router";
+import App from "./app";
 import Voting from "./voting";
+import Results from "./results";
 
-const pair = ["Trainspotting", "Pulp Fiction"];
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {}
-  }
-
-  render() {
-    return (
-      <Voting
-        pair={this.props.pair}
-        vote={(entry) => {
-          this.setState({votedFor: entry})
-        }}
-        votedFor={this.state.votedFor}
-      />
-    );
-  }
-}
-
-const app = ReactDOM.render(
-  <App pair={pair}/>,
+ReactDOM.render(
+  <Router>
+    <Route component={App}>
+      <Route path="/" component={Voting} />
+      <Route path="/results" component={Results} />
+    </Route>
+  </Router>,
   document.getElementById('app')
 );
