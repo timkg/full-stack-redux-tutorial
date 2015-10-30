@@ -1,21 +1,30 @@
 import React, { Component } from "react";
+import Winner from "./winner";
+import Vote from "./vote";
 
-class VotingComponent extends Component {
+class Voting extends Component {
+  isDisabled() {
+    return !!this.props.votedFor;
+  }
+
+  hasVotedFor(entry) {
+    return this.props.votedFor === entry;
+  }
+
   render() {
     return (
       <div className="voting">
-        {this.props.pair.map(entry => {
-          return (
-            <button key={entry} onClick={() => this.props.vote(entry)}>
-              <h1>{entry}</h1>
-            </button>
-          );
-        })}
+        {this.props.winner ?
+          <Winner ref="winner" winner={this.props.winner} /> :
+          <Vote {...this.props} />}
       </div>
     );
   }
 }
 
-VotingComponent.defaultProps = { pair: [], vote: (entry) => { console.log(entry) } };
+Voting.defaultProps = {
+  pair: [],
+  vote: (entry) => { console.log(entry) }
+};
 
-export default VotingComponent
+export default Voting

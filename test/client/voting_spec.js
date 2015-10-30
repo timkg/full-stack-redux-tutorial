@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import ReactTestUtils from "react-addons-test-utils";
 import Voting from "../../src/client/voting";
 import { expect } from "chai";
@@ -32,4 +33,27 @@ describe("Voting", () => {
 
     expect(votedWith).to.equal("Trainspotting");
   });
+
+  it("adds label to the voted entry", () => {
+    const component = renderIntoDocument(
+      <Voting pair={["Trainspotting", "Pulp Fiction"]}
+              votedFor="Trainspotting" />
+    );
+    const buttons = scryRenderedDOMComponentsWithTag(component, 'button');
+
+    expect(buttons[0].textContent).to.contain('Voted');
+  });
+
+  it("renders just the winner when there is one", () => {
+    const component = renderIntoDocument(
+      <Voting winner="Trainspotting" />
+    );
+    const buttons = scryRenderedDOMComponentsWithTag(component, "button");
+    expect(buttons.length).to.equal(0);
+
+    const winner = ReactDOM.findDOMNode(component.refs.winner);
+    expect(winner).to.be.ok;
+    expect(winner.textContent).to.contain("Trainspotting");
+  });
+
 });
