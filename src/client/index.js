@@ -7,16 +7,12 @@ import { ResultsContainer } from "./results";
 import { createStore } from "redux";
 import reducer from "./reducer";
 import { Provider } from "react-redux";
+import io from "socket.io-client";
 
 const store = createStore(reducer);
-store.dispatch({
-  type: "SET_STATE",
-  state: {
-    vote: {
-      pair: ["Trainspotting", "Pulp Fiction 2"],
-      tally: { "Trainspotting": 2 }
-    }
-  }
+const socket = io(`${location.protocol}//${location.hostname}:8090`)
+socket.on("state", (state) => {
+  store.dispatch({ type: "SET_STATE", state });
 });
 
 ReactDOM.render(
