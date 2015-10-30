@@ -17,7 +17,6 @@ class Voting extends Component {
     return (
       <div className="voting">
         <Link to="/results">results</Link>
-        <p>Hello from voting</p>
         {this.props.winner ?
           <Winner ref="winner" winner={this.props.winner} /> :
           <Vote pair={this.props.pair}
