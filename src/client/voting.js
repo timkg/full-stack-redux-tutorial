@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Winner from "./winner";
 import Vote from "./vote";
 import { fromJS } from "immutable";
+import Router, { Link } from "react-router";
 
 class Voting extends Component {
   isDisabled() {
@@ -15,6 +16,7 @@ class Voting extends Component {
   render() {
     return (
       <div className="voting">
+        <Link to="/results">results</Link>
         <p>Hello from voting</p>
         {this.props.winner ?
           <Winner ref="winner" winner={this.props.winner} /> :
