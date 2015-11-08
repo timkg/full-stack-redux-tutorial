@@ -20,8 +20,5 @@ module.exports = {
       include: __dirname + "/src/client",
       loader: "react-hot!babel"
     }]
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  }
 };
