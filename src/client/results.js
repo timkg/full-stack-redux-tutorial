@@ -3,11 +3,12 @@ import { fromJS } from "immutable"
 import Router, { Link } from "react-router";
 import Winner from "./winner";
 import { connect } from "react-redux";
+import * as actionCreators from "./actionCreators";
 
 export class Results extends Component {
   getVotes(entry) {
-    if (this.props.tally.has(entry)) {
-      return this.props.tally.get(entry);
+    if (this.props.count.has(entry)) {
+      return this.props.count.get(entry);
     }
 
     return 0;
@@ -43,15 +44,15 @@ export class Results extends Component {
 
 Results.defaultProps = {
   pair: fromJS([]),
-  tally: fromJS({})
+  count: fromJS({})
 };
 
 function mapStateToProps (state) {
   return {
     pair: state.getIn(["vote", "pair"]),
-    tally: state.getIn(["vote", "tally"]),
+    count: state.getIn(["vote", "count"]),
     winner: state.get("winner")
   };
 }
 
-export const ResultsContainer = connect(mapStateToProps)(Results);
+export const ResultsContainer = connect(mapStateToProps, actionCreators)(Results);

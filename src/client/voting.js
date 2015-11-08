@@ -4,6 +4,7 @@ import Vote from "./vote";
 import { fromJS } from "immutable";
 import Router, { Link } from "react-router";
 import { connect } from "react-redux";
+import * as actionCreators from "./actionCreators";
 
 export class Voting extends Component {
   isDisabled() {
@@ -39,8 +40,9 @@ Voting.defaultProps = {
 function mapStateToProps(state) {
   return {
     pair: state.getIn(["vote", "pair"]),
+    votedFor: state.get("votedFor"),
     winner: state.get("winner")
   };
 }
 
-export const VotingContainer = connect(mapStateToProps)(Voting);
+export const VotingContainer = connect(mapStateToProps, actionCreators)(Voting);
